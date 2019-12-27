@@ -1,0 +1,18 @@
+Create:
+  nginx: kubectl run nginx --image=nginx
+  describe: kubectl describe pod newpods-8kv2x
+  yml: kubectl create -f redis-pod.yml
+Extract:
+  pod-defintion: kubectl get pod <pod-name> -o yaml > pod-definition.yaml
+Edit:
+  edit: kubectl edit pod ${pod-name-redis}
+
+Apply:
+
+Get:
+  default: kubectl get pods
+  wide: kubectl get pods -o wide
+
+Delete:
+  default: kubectl delete pod webapp
+

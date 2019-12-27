@@ -1,0 +1,8 @@
+server:
+  servlet:
+    context-path: /v1/scale
+  port: 8080
+spring:
+  application:
+    name: Scallble Microservice
+  profiles: dev

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: user-service-pod
+  labels:
+    app: user-microservice
+    purpose: Horizontal scale
+spec:
+  containers:
+    - name: kubernetes-setup-service
+      image: kubernetes-setup-service/demo:latest
+
