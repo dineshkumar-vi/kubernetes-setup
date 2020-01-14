@@ -13,6 +13,30 @@ Get:
   default: kubectl get pods
   wide: kubectl get pods -o wide
 
+getALL: kubectl get all
+
 Delete:
   default: kubectl delete pod webapp
+clear
+Replicaset:
+  create: kubectl create -f replicaset-definition.yml
+  edit: kubectl edit {name}
+  scale:
+    byDef: kubectl scale --replicas=6 replicaset-definition.yml
+    replace: kubectl replace -f ricaset-definition.yml
+    byName: kubectl scale --replicas=6 replicaset myapp-replicaset
+  get: kubectl get replicaset
+  delete: kubectl delete replicaset
+  deleteByName: kubectl delete replicaset myapp-replicaset
+  Describe: kubectl describe replicaset/{name}
+
+Deployment:
+  create: kubectl create -f deployment-definition.yml
+  get: kubectl get deployments
+
+namespace:
+  get: kubectl get pods --namespace={name space}
+  create: kubectl create -f pod-def.yaml --namespace=dev
+
+
 

@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ReplicaSet
+metadata:
+  name: Myapp-Replicaset
+  labels:
+    app: user-microservice
+    type: user-microservice
+spec:
+  template:
+    metadata:
+      name: user-service-pod
+      labels:
+        app: user-microservice
+        purpose: Horizontal scale
+    spec:
+      containers:
+        - name: kubernetes-setup-service
+          image: kubernetes-setup-service/demo:latest
+  replicas: 3
+  selector:
+    matchLabels:
+      type: user-microservice:q!
+
+
+
