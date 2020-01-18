@@ -1,13 +1,11 @@
 Create:
-  nginx: kubectl run nginx --image=nginx
   describe: kubectl describe pod newpods-8kv2x
   yml: kubectl create -f redis-pod.yml
 Extract:
   pod-defintion: kubectl get pod <pod-name> -o yaml > pod-definition.yaml
 Edit:
   edit: kubectl edit pod ${pod-name-redis}
-
-Apply:
+deployment: kubectl run blue --image=nginx --replicas=6
 
 Get:
   default: kubectl get pods
@@ -34,9 +32,84 @@ Deployment:
   create: kubectl create -f deployment-definition.yml
   get: kubectl get deployments
 
-namespace:
+namesp
   get: kubectl get pods --namespace={name space}
   create: kubectl create -f pod-def.yaml --namespace=dev
+
+Secret: kubectl create secret generic db-secret --from-literal=DB_Host=sql01 --from-literal=DB_User=root --from-literal=DB_Password=password123
+Sec: kubectl exec ubuntu-sleeper whoami
+serviceAccount:
+  create: kubectl create serviceaccount jenkins
+  get: kubectl get serviceaccount
+  describe-secret: kubectl describe secret <Secret Name>
+
+Resources:
+  requests:
+    cpu: 1 GCP core / 1 AWS
+    mem: 1GI
+  limits:
+    cpu: 2
+    mem: 2
+
+Taint:
+  Create: kubectl taint nodes node-name key=value:taint-effect
+  Remove: kubectl taint nodes master node-role.kubernetes.io/master:NoSchedule-
+tolerations:
+  - key:  taint key
+    value: taint value
+    effect: taint effect
+    operator: Equal
+
+NodeSelectore:
+  create: kubectl label nodes node-1 size=Large
+  Apply: kubectl label node node01 color=blue
+NodeAffinity:
+
+readinessProbe:
+  httpGet:
+    path: /api/ready
+    port: 8080
+  tcpSocket:
+    port: 3306
+  exec:
+    commmand:
+      - cat
+      - /app/is_ready
+  initialDealySeconds: 10
+  periodSeconds: 5
+livenessProbe:
+  httpGet:
+    path: /api/ready
+    port: 8080
+  tcpSocket:
+    port: 3306
+  exec:
+    commmand:
+      - cat
+      - /app/is_ready
+conatinerLogging:
+  docker: docker logs -f containerId
+  kubernetes: kubectl logs -f podname
+  multiContainerLog: kubectl logs -f podname containerName
+
+monitor:
+  heapster:
+  metricsServcer:
+    enable:
+      miniKube: minikube addons enable metrics-server
+      others: Download metrics-server from https://github.com/kodekloudhub/kubernetes-metrics-server.git and install using kubectl create -f deploy/1.8+
+    nodePerformance: kubectl top node
+    podPerformance: kubectl top pod
+Admin:
+  base: kubeadm init
+
+PodDesign:
+  labelsSelectores:
+
+
+
+
+
 
 
 
