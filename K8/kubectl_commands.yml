@@ -105,6 +105,36 @@ Admin:
 
 PodDesign:
   labelsSelectores:
+    labels:
+      app: App1
+      function: Front-end
+    get: kubectl get pods --selector app=App1
+    multiSelector: kubectl get all --selector env=prod,bu=finance,tier=frontend
+
+Deployment&Rollout:
+  create: kubectl create -f deployment-def.ymal
+  get: kubectl get deployments
+  apply: kubectl apply -f deployment-definition.yaml
+  set: kubectl set image deployment/myapp-deployment nginx=nginx:1.9.1
+  rollout: kubectl rollout status deployment/myapp-deployment
+  history: kubectl rollout history deployment/myapp-deployment
+  undo: kubectl rollout undo deployment/myapp-deployment
+
+Jobs:
+  docker: docker run ubuntu expr 3+2
+  create: kubectl create -f job-definition.yaml
+  get: kuebctl get jobs
+  delete: kubectl delete job math-add-job
+
+cronJobs:
+  create: kubectl create -f cronjob-definition.yaml
+  get: kuebctl get cronjobs
+
+logs:
+  get: kubectl logs math-add-job-id87pn
+
+services:
+  
 
 
 
