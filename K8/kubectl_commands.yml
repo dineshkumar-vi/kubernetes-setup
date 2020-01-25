@@ -134,7 +134,41 @@ logs:
   get: kubectl logs math-add-job-id87pn
 
 services:
-  
+  get: kubectl get services
+  Nodeport: kubectl create -f service-definition.yaml
+  ClusterIP: kubectl create -f clusterIp-service-definition.yaml
+  LoadBalancer: GCP load balancer
+
+ingress:
+  controller:
+    GCPHttps:
+    nginx:
+    contour:
+    haproxy:
+    traefik:
+    lstio:
+  configure:
+    resources:
+  get: kubectl get ingress
+  create: kubecl create -f ingress-resource-path.yaml
+  getAll: kubectl get ingress --all-namespaces
+  describe: kubectl describe ingress --namespace app-space
+  edit: kubectl edit ingress --namespace app-space
+
+ingressLifecycle:
+  createNameSpace: kubectl create namespace ingress-space
+  createConfigMap: kubectl create configmap nginx-configuration --namespace ingress-space
+  createServiceAccount: kubectl create serviceaccount ingress-serviceaccount --namespace ingress-space
+  ServiceAccountRoles: kubectl get roles,rolebindings --namespace ingress-space
+  deployIngressController: kubectl create -f ingress-controller-def.yaml
+  ingressService: kubectl create -f ingress-service-def.yaml
+  ingressResource:
+
+namespace:
+  deploy: kubectl get deploy --all-namespaces
+  ingress: kubectl get ingress --all-namespaces
+  all: kubectl get all --all-namespaces
+  create: kubectl create namespace ingress-space
 
 
 
