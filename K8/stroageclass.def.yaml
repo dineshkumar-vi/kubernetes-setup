@@ -1,0 +1,5 @@
+apiVersion: stroage.k8s.io/v1
+kind: StroageClass
+metadata:
+  name: google-stroage
+provisioner: kubernetes.io/gce-pd

@@ -32,9 +32,6 @@ Deployment:
   create: kubectl create -f deployment-definition.yml
   get: kubectl get deployments
 
-namesp
-  get: kubectl get pods --namespace={name space}
-  create: kubectl create -f pod-def.yaml --namespace=dev
 
 Secret: kubectl create secret generic db-secret --from-literal=DB_Host=sql01 --from-literal=DB_User=root --from-literal=DB_Password=password123
 Sec: kubectl exec ubuntu-sleeper whoami
@@ -162,13 +159,37 @@ ingressLifecycle:
   ServiceAccountRoles: kubectl get roles,rolebindings --namespace ingress-space
   deployIngressController: kubectl create -f ingress-controller-def.yaml
   ingressService: kubectl create -f ingress-service-def.yaml
-  ingressResource:
+  ingressResource: kubectl create -f ingress-resource-path.yaml
 
 namespace:
   deploy: kubectl get deploy --all-namespaces
   ingress: kubectl get ingress --all-namespaces
   all: kubectl get all --all-namespaces
   create: kubectl create namespace ingress-space
+
+networkPolicy:
+  create-ingress: kubectl create -f networkpolicy-ingress-def.yaml
+  create-egress: kubectl create -f networkpolicy-egress-def.yaml
+  get: kubectl get networkpolicy
+  describe: kubectl describe networkpolicy
+
+
+volume:
+  podwithVolume: kubectl create -f PodWith-Volume-def.yaml
+
+Persistentvolumes:
+  createFile: kubectl create -f persistent-voulmd-def-yaml
+  createAws: kubectl create -f persistent-aws-def-yaml
+  get: kubectl get PersistentVolume
+
+Persistentvolumes-claims:
+  createFile: kubectl create -f persistent-claim-def.yaml
+  get: kubectl get PersistentVolumeClaim
+  delete: kubectl delete PersistentVolumeClaim myclaim
+
+
+Stroageclass:
+  create: storageclass.def.yaml
 
 
 

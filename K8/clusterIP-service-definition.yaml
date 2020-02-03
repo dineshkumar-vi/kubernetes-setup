@@ -1,12 +1,14 @@
 apiVersion: v1
 kind: Service
 metaData:
-  name: back-end
+  name: wordpress-mysql
+  labels:
+    app: wordpress
 spec:
   type: ClusterIP
   ports:
-    - targetPort: 80
-      port: 80
+    - port: 3306
   selector:
-    app: myApp
-    type: front-end
+    app: wordpress
+    tier: database
+  clusterIP: None
