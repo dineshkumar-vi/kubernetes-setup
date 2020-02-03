@@ -15,6 +15,7 @@ Service:
   expose-deployment: kubectl expose deployment webapp --type=NodePort --port=8080 --name=webapp-service --dry-run -o yaml > webapp-service.yaml yaml
 namespace:
   create: kubectl create namespace ingress-space
+  assign: kubectl create -f def.yaml --namespace=dev
 
 
 

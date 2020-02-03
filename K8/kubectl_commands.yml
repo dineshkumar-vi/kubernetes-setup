@@ -31,9 +31,9 @@ Replicaset:
 Deployment:
   create: kubectl create -f deployment-definition.yml
   get: kubectl get deployments
+  expose: kubectl expose deployment redis --port=6379 --name messaging-service --namespace marketing
 
-
-Secret: kubectl create secret generic db-secret --from-literal=DB_Host=sql01 --from-literal=DB_User=root --from-literal=DB_Password=password123
+Secret: kubectl create secret generic db-secret-xxdf --from-literal=DB_Host=sql01 --from-literal=DB_User=root --from-literal=DB_Password=password123
 Sec: kubectl exec ubuntu-sleeper whoami
 serviceAccount:
   create: kubectl create serviceaccount jenkins
@@ -129,6 +129,7 @@ cronJobs:
 
 logs:
   get: kubectl logs math-add-job-id87pn
+  export: kubectl logs e-com-1123 --namespace e-commerce > /opt/outputs/e-com-1123.logs
 
 services:
   get: kubectl get services
@@ -190,6 +191,10 @@ Persistentvolumes-claims:
 
 Stroageclass:
   create: storageclass.def.yaml
+
+secret:
+  create: kubectl create secret generic db-secret-xxdf --from-literal=DB_Host=sql01 --from-literal=DB_User=root --from-literal=DB_Password=password123
+
 
 
 
